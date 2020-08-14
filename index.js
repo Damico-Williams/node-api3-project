@@ -6,7 +6,7 @@ const userRouter = require("./users/userRouter")
 
 
 const server = express()
-const port = 2000
+const port = process.env.PORT || 2000
 
 server.use(express.json())
 server.use(postRouter)
@@ -17,7 +17,7 @@ server.use((err, req, res, next) => {
 	console.log(err)
 
 	res.status(500).json({
-		message: "missing required text field"
+		message: "error"
 	})
 })
 

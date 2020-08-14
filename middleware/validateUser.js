@@ -21,24 +21,15 @@ function validateUserId() {
 
 function validateUser() {
     return (req, res, next) => {
-        if(!req.params.id) {
-            return res.status(400).json({
+        if(!Object.keys(req.body).length) {
+            res.status(400).json({
                 message: "missing user data"
             })
-        }
-        
-        db.getById(req.body.text)
-		.then((post) => {
-			if (post) {
-                req.post = post
-				next()
-			} else {
-				res.status(400).json({
-					message: "missing required name field",
-				})
-			}
-		})
-		.catch(next)
+        } else if (!req.body.name) {
+            res.status(400).json({
+                message: "missing required name field",
+            })
+        } else {next()}
     }
 }
 

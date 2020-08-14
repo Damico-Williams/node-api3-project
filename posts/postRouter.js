@@ -6,7 +6,7 @@ const {validatePost} = require("../middleware/validatePost")
 router.get('/', (req, res) => {
   // do your magic!
   res.json({
-		message: "Welcome to my API",
+		message: `Welcome to my API ${process.env.COHORT}`,
 	})
 });
 
@@ -51,7 +51,12 @@ router.post("/posts", validatePost(), (req, res) => {
   .then((post) => {
       res.status(201).json(post)
   })
-  .catch(next)
+  .catch((error) => {
+    console.log(error)
+    res.status(500).json({
+        error: "not posting"
+    })
+})
 })
 
 // DELETE

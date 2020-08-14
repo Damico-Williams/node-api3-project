@@ -7,13 +7,8 @@ const {validateUserId, validateUser} = require("../middleware/validateUser")
 //   // do your magic!
 // });
 
-router.post('/users', (req, res) => {
+router.post('/users', validateUser(), (req, res) => {
   // do your magic!
-  if(!req.body.name) {
-    return res.status(400).json({
-        errorMessage: "Please provide name for the post."
-    })
-}
 
 db.insert(req.body)
 .then((user) => {
@@ -22,7 +17,7 @@ db.insert(req.body)
 .catch((error) => {
     console.log(error)
     res.status(500).json({
-        error: "There was an error while saving the post to the database"
+        error: "where my next should have been working"
     })
 })
 });
